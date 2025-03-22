@@ -1,0 +1,3 @@
+greeting:Hola, Mundo!
+farewell:Adiós, Mundo!
+question:¿Cómo estás?

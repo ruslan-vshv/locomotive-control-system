@@ -1,0 +1,3 @@
+greeting:Hello, World!
+farewell:Goodbye, World!
+question:How are you?
