@@ -1,3 +1,3 @@
-greeting:Hello, World!
-farewell:Goodbye, World!
-question:How are you?
+Hello, World!:Hello, World!
+Goodbye, World!:Goodbye, World!
+How are you?:How are you?

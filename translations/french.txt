@@ -1,3 +1,3 @@
-greeting:Bonjour, le Monde!
-farewell:Au revoir, le Monde!
-question:Comment vas-tu?
+Hello, World!:Bonjour, le Monde!
+Goodbye, World!:Au revoir, le Monde!
+How are you?:Comment vas-tu?
