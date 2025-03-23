@@ -8,12 +8,14 @@ set(SOURCES
         main.c
         core/translator.c
         core/logger.c
+        core/user_interface.c
 )
 
 # Define header files (for IDEs, not strictly required for build)
 set(HEADERS
         core/translator.h
         core/logger.h
+        core/user_interface.h
 )
 
 # Add executable target

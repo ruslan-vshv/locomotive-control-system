@@ -4,6 +4,8 @@
 #include <dirent.h>
 #include "translator.h"
 
+#include "logger.h"
+
 #define MAX_KEY 20
 #define MAX_VALUE 50
 #define MAX_LANGUAGES 10
@@ -16,11 +18,12 @@ typedef struct {
 } Translation;
 
 static Translation *translations = NULL;
+static char *translation_file = NULL;
 static int trans_count = 0;
 static int is_initialized = 0;  // Track if translations are loaded
 
 // Language selection logic
-static char *select_translation_file() {
+void select_language() {
     // Load list of languages based on available translation files.
     static char selected_language[MAX_FILENAME];
     char languages[MAX_LANGUAGES][MAX_FILENAME];
@@ -29,7 +32,7 @@ static char *select_translation_file() {
     DIR *dir = opendir(TRANSLATIONS_FOLDER);
     if (dir == NULL) {
         printf("Error: Could not open translations directory\n");
-        return NULL;
+        return;
     }
 
     struct dirent *entry;
@@ -44,7 +47,7 @@ static char *select_translation_file() {
 
     if (num_languages == 0) {
         printf("Error: No translation files found in translations directory\n");
-        return NULL;
+        return;
     }
 
     // Language selection interface.
@@ -62,11 +65,16 @@ static char *select_translation_file() {
 
     if (choice < 1 || choice > num_languages) {
         printf("Invalid choice!\n");
-        return NULL;
+        return;
     }
 
+    // Log selection.
+    char chosen_language[50];
+    sprintf(chosen_language, "User has chosen %s", languages[choice - 1]);
+    log_event(chosen_language, "info");
+
     snprintf(selected_language, MAX_FILENAME, "%s%s", TRANSLATIONS_FOLDER, languages[choice - 1]);
-    return selected_language;
+    translation_file = selected_language;
 }
 
 // Load translations for selected language.
@@ -116,14 +124,13 @@ static Translation *load_translations(const char *filename, int *count) {
     return loaded_translations;
 }
 
-// Initialize translator - run language selection logic and load translations for selected lang.
+// Initialize translator - load translations for selected lang.
 int initialize_translator() {
-    char *selected_file = select_translation_file();
-    if (selected_file == NULL) {
-        return 0;
+    if (translation_file == NULL) {
+        select_language();
     }
 
-    translations = load_translations(selected_file, &trans_count);
+    translations = load_translations(translation_file, &trans_count);
     if (translations == NULL || trans_count == 0) {
         printf("No translations loaded!\n");
         return 0;

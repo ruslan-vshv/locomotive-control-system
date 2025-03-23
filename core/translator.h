@@ -4,5 +4,6 @@
 // Function declarations
 const char *t(const char *key);
 void free_translations();
+void select_language();
 
 #endif
