@@ -1,3 +1,6 @@
-Hello, World!:Hello, World!
-Goodbye, World!:Goodbye, World!
-How are you?:How are you?
+Main menu:Main menu
+Exit:Exit
+Invalid choice!:Invalid choice!
+Enter your choice:Enter your choice
+Activate brakes:Activate brakes
+Release brakes:Release brakes

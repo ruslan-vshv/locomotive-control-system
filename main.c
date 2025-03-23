@@ -5,8 +5,5 @@
 
 void main() {
     user_interface_init();
-
-    printf("%s\n", t("Hello, World!"));
-
     log_event("Application closed.", "info");
 }

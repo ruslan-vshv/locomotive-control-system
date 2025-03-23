@@ -6,15 +6,15 @@
 
 #include "logger.h"
 
-#define MAX_KEY 20
-#define MAX_VALUE 50
+#define MAX_STRING 20
+#define MAX_TRANSLATION 20
 #define MAX_LANGUAGES 10
 #define MAX_FILENAME 50
 #define TRANSLATIONS_FOLDER "../translations/"
 
 typedef struct {
-    char key[MAX_KEY];
-    char value[MAX_VALUE];
+    char string[MAX_STRING];
+    char translation[MAX_TRANSLATION];
 } Translation;
 
 static Translation *translations = NULL;
@@ -60,12 +60,16 @@ void select_language() {
     }
 
     int choice;
-    printf("Enter your choice (1-%d): ", num_languages);
-    scanf("%d", &choice);
 
-    if (choice < 1 || choice > num_languages) {
-        printf("Invalid choice!\n");
-        return;
+    while (1) {
+        printf("Enter your choice (1-%d): ", num_languages);
+        scanf("%d", &choice);
+
+        if (choice < 1 || choice > num_languages) {
+            printf("Invalid choice!\n");
+            continue;
+        }
+        break;
     }
 
     // Log selection.
@@ -112,10 +116,10 @@ static Translation *load_translations(const char *filename, int *count) {
         if (colon == NULL) continue;
 
         *colon = '\0';
-        strncpy(loaded_translations[index].key, line, MAX_KEY - 1);
-        loaded_translations[index].key[MAX_KEY - 1] = '\0';
-        strncpy(loaded_translations[index].value, colon + 1, MAX_VALUE - 1);
-        loaded_translations[index].value[MAX_VALUE - 1] = '\0';
+        strncpy(loaded_translations[index].string, line, MAX_STRING - 1);
+        loaded_translations[index].string[MAX_STRING - 1] = '\0';
+        strncpy(loaded_translations[index].translation, colon + 1, MAX_TRANSLATION - 1);
+        loaded_translations[index].translation[MAX_TRANSLATION - 1] = '\0';
         index++;
     }
     fclose(file);
@@ -143,19 +147,19 @@ int initialize_translator() {
 }
 
 // Get translation for provided sting.
-const char *t(const char *key) {
+const char *t(const char *string) {
     if (!is_initialized && !initialize_translator()) {
         return "Translation module failed to initialize";
     }
 
     for (int i = 0; i < trans_count; i++) {
-        if (strcmp(translations[i].key, key) == 0) {
-            return translations[i].value;
+        if (strcmp(translations[i].string, string) == 0) {
+            return translations[i].translation;
         }
     }
 
     // If no translation found - return original string.
-    return key;
+    return string;
 }
 
 // Free allocated memory for translations list.

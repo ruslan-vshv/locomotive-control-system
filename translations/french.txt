@@ -1,3 +1,6 @@
-Hello, World!:Bonjour, le Monde!
-Goodbye, World!:Au revoir, le Monde!
-How are you?:Comment vas-tu?
+Main menu:Menu principal
+Exit:Sortie
+Invalid choice!:Choix invalide !
+Enter your choice:Entrez votre choix
+Activate brakes:Activer les freins
+Release brakes:Relâcher les freins

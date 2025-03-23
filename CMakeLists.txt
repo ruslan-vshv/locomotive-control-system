@@ -9,6 +9,8 @@ set(SOURCES
         core/translator.c
         core/logger.c
         core/user_interface.c
+        modules/brake.c
+        modules/brake.h
 )
 
 # Define header files (for IDEs, not strictly required for build)
@@ -16,6 +18,8 @@ set(HEADERS
         core/translator.h
         core/logger.h
         core/user_interface.h
+        modules/brake.c
+        modules/brake.h
 )
 
 # Add executable target
