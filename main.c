@@ -5,5 +5,5 @@
 void main() {
     printf("%s\n", t("Hello, World!"));
 
-    log_event("Application closed.");
+    log_event("Application closed.", "info");
 }
