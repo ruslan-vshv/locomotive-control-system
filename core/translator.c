@@ -4,6 +4,12 @@
 #include <dirent.h>
 #include "translator.h"
 
+#define MAX_KEY 20
+#define MAX_VALUE 50
+#define MAX_LANGUAGES 10
+#define MAX_FILENAME 50
+#define TRANSLATIONS_FOLDER "../translations/"
+
 typedef struct {
     char key[MAX_KEY];
     char value[MAX_VALUE];
@@ -63,6 +69,7 @@ static char *select_translation_file() {
     return selected_language;
 }
 
+// Load translations for selected language.
 static Translation *load_translations(const char *filename, int *count) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -71,6 +78,7 @@ static Translation *load_translations(const char *filename, int *count) {
         return NULL;
     }
 
+    // Count lines in file to allocate memory.
     int num_lines = 0;
     char line[100];
 
@@ -79,6 +87,7 @@ static Translation *load_translations(const char *filename, int *count) {
     }
     rewind(file);
 
+    // Allocate memory for translations to load.
     Translation *loaded_translations = (Translation *)malloc(num_lines * sizeof(Translation));
     if (loaded_translations == NULL) {
         printf("Error: Memory allocation failed\n");
@@ -87,6 +96,7 @@ static Translation *load_translations(const char *filename, int *count) {
         return NULL;
     }
 
+    // Load content of a translation file into Translation struct.
     int index = 0;
     while (fgets(line, sizeof(line), file) && index < num_lines) {
         line[strcspn(line, "\n")] = 0;

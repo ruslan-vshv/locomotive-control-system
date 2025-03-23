@@ -7,11 +7,13 @@ set(CMAKE_C_STANDARD 11)
 set(SOURCES
         main.c
         core/translator.c
+        core/logger.c
 )
 
 # Define header files (for IDEs, not strictly required for build)
 set(HEADERS
         core/translator.h
+        core/logger.h
 )
 
 # Add executable target
