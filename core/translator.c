@@ -63,7 +63,7 @@ int choose_language(char *selected_language) {
     int num_languages = 0;
 
     // Scan the "translations" folder
-    DIR *dir = opendir("translations");
+    DIR *dir = opendir(TRANSLATIONS_FOLDER);
     if (dir == NULL) {
         printf("Error: Could not open translations directory\n");
         return 0;
@@ -104,7 +104,7 @@ int choose_language(char *selected_language) {
     }
 
     // Construct full path to selected file
-    snprintf(selected_language, MAX_FILENAME, "translations/%s", languages[choice - 1]);
+    snprintf(selected_language, MAX_FILENAME, "%s%s", TRANSLATIONS_FOLDER, languages[choice - 1]);
     return 1; // Success
 }
 
