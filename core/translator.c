@@ -131,7 +131,7 @@ static Translation *load_translations(const char *filename, int *count) {
 // Initialize translator - load translations for selected lang.
 int initialize_translator() {
     if (translation_file == NULL) {
-        select_language();
+        // select_language();
     }
 
     translations = load_translations(translation_file, &trans_count);
