@@ -12,6 +12,8 @@ set(SOURCES
         core/autoloader.c
         modules/brake.c
         core/modules_menu.c
+        modules/compressor_unit.c
+        modules/traction_control.c
 )
 
 # Define header files (for IDEs, not strictly required for build)
@@ -23,6 +25,8 @@ set(HEADERS
         modules/brake.h
         core/module.h
         core/modules_menu.h
+        modules/compressor_unit.h
+        modules/traction_control.h
 )
 
 # Add executable target
